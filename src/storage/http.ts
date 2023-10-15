@@ -60,7 +60,7 @@ export function ipxHttpStorage(_options: HTTPStorageOptions = {}): IPXStorage {
   function parseResponse(response: Response) {
     let maxAge = defaultMaxAge;
     const _cacheControl = response.headers.get("cache-control");
-    if (_cacheControl) {
+    if (_cacheControl && typeof maxAge === "undefined") {
       const m = _cacheControl.match(/max-age=(\d+)/);
       if (m && m[1]) {
         maxAge = Number.parseInt(m[1]);
